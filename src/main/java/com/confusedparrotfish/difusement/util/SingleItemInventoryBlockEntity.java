@@ -6,10 +6,12 @@ import com.confusedparrotfish.difusement.network.packet.ItemStackSyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,9 +22,14 @@ public class SingleItemInventoryBlockEntity extends BlockEntity implements World
     }
 
     public ItemStack item = ItemStack.EMPTY;
+    public int time = 0;
 
     public void drops() {
         Containers.dropContents(level, worldPosition, this);
+    }
+
+    public void tick_entity(Level level, BlockPos pos, BlockState state) {
+        time++;
     }
 
     public void notifyClient() {
@@ -36,15 +43,31 @@ public class SingleItemInventoryBlockEntity extends BlockEntity implements World
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("item", item.save(new CompoundTag()));
-        System.out.println(item);
+        // System.out.println(item);
+    }
+
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        tag.put("item", item.save(new CompoundTag()));
+        return tag;
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         item = ItemStack.of(tag.getCompound("item"));
-        System.out.println(item);
+        // loaded = false;
+        // setItem(ItemStack.of(tag.getCompound("item")));
+        // notifyClient();
+        // System.out.println(item);
     }
+
+    // @Override
+    // public void deserializeNBT(CompoundTag nbt) {
+    //     super.deserializeNBT(nbt);
+        
+    //     notifyClient();
+    // }
 
     @Override
     public int getContainerSize() {
@@ -121,4 +144,22 @@ public class SingleItemInventoryBlockEntity extends BlockEntity implements World
     public boolean canTakeItemThroughFace(int slot, ItemStack item, Direction dir) {
         return !isEmpty();
     }
+
+    // public boolean loaded = false;
+    // public void load_tick() {
+    //     if (!loaded) {
+    //         System.out.println("suffer");
+    //         System.out.println(item);
+    //         System.out.println(level.isClientSide);
+    //         // notifyClient();
+    //         // this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+    //         // level.setBlockEntity(this);
+    //         // CampfireBlockEntity
+    //     }
+    //     loaded = true;
+    // }
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+      return ClientboundBlockEntityDataPacket.create(this);
+   }
 }

@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -20,6 +22,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.stream.Stream;
 
+import com.confusedparrotfish.difusement.entity.block.block_entities;
 import com.confusedparrotfish.difusement.entity.block.obsidian_pedestal_be;
 
 public class obsidian_pedestal extends BaseEntityBlock {
@@ -58,6 +61,8 @@ public class obsidian_pedestal extends BaseEntityBlock {
                 ((obsidian_pedestal_be) ent).drops();
             }
         }
+        
+        level.removeBlockEntity(pos);
     }
 
     @Override
@@ -83,5 +88,10 @@ public class obsidian_pedestal extends BaseEntityBlock {
         }
         
         return InteractionResult.CONSUME_PARTIAL;
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, block_entities.OBSIDIAN_PEDESTAL_BET.get(), obsidian_pedestal_be::tick);
     }
 }

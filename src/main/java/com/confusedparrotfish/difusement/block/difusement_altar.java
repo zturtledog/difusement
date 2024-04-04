@@ -84,5 +84,7 @@ public class difusement_altar extends BaseEntityBlock {
                 ((difusement_altar_be) ent).drops();
             }
         }
+        
+        level.removeBlockEntity(pos);
     }
 }

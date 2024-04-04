@@ -15,9 +15,12 @@ public class obsidian_pedestal_be extends SingleItemInventoryBlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, obsidian_pedestal_be pEntity) {
+        pEntity.tick_entity(level, pos, state);
         if (level.isClientSide()) {
             return;
         }
+        // if (!pEntity.loaded) System.out.println(pEntity.loaded);
+        // pEntity.load_tick();
     }
     
     @Override

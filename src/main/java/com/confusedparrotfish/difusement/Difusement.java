@@ -7,12 +7,14 @@ import com.confusedparrotfish.difusement.entity.block.block_entities;
 import com.confusedparrotfish.difusement.entity.block.renderer.difusement_altar_ber;
 import com.confusedparrotfish.difusement.entity.block.renderer.obsidian_pedestal_ber;
 import com.confusedparrotfish.difusement.item.items;
+import com.confusedparrotfish.difusement.network.message;
 import com.mojang.logging.LogUtils;
 
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 // import org.slf4j.Logger;
 
@@ -25,6 +27,7 @@ public class Difusement {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // modEventBus.addListener(this::clientsetup);
+        modEventBus.addListener(this::commonsetup);
         modEventBus.addListener((EntityRenderersEvent.RegisterRenderers event)->{
             event.registerBlockEntityRenderer(block_entities.DIFUSEMENT_ALTAR_BET.get(), difusement_altar_ber::new);
             event.registerBlockEntityRenderer(block_entities.OBSIDIAN_PEDESTAL_BET.get(), obsidian_pedestal_ber::new);
@@ -38,6 +41,11 @@ public class Difusement {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    private void commonsetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            message.register();
+        });
+    }
     
     // private void clientsetup(final FMLClientSetupEvent event) { 
     //     //     ItemBlockRenderTypes.setRenderLayer(blocks.DIFUSEMENT_ALTAR.get(),RenderType.cutout());

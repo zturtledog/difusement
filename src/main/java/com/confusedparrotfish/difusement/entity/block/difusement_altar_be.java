@@ -18,17 +18,19 @@ public class difusement_altar_be extends SingleItemInventoryBlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, difusement_altar_be pEntity) {
+        pEntity.tick_entity(level, pos, state);
         if (level.isClientSide()) {
             pEntity.book.update(level, pos, state);
             return;
         }
+        // pEntity.load_tick();
         // System.out.println(pEntity.item);
 
         // level.setBlockEntity(pEntity);
 
         // todo: prossessing
     }
-    
+
     @Override
     public boolean canTakeItemThroughFace(int slot, ItemStack item, Direction dir) {
         if (dir == Direction.DOWN)

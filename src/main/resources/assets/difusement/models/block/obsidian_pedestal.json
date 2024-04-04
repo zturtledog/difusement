@@ -4,6 +4,7 @@
 		"0": "difusement:block/obsidian_pedestal",
 		"particle": "difusement:block/obsidian_pedestal"
 	},
+    "render_type":"cutout",
 	"elements": [
 		{
 			"from": [0, 14, 0],
