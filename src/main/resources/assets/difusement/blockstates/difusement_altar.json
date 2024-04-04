@@ -1,0 +1,5 @@
+{
+    "variants":{
+        "": { "model": "difusement:block/difusement_altar"}
+    }
+}

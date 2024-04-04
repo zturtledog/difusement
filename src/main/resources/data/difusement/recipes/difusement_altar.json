@@ -1,0 +1,31 @@
+{
+    "type":"minecraft:crafting_shaped",
+    "pattern":[
+        "ABA",
+        "DGD",
+        "OLO"
+    ],
+    "key":{
+        "O":{
+            "item":"minecraft:obsidian"
+        },
+        "D":{
+            "item":"minecraft:diamond"
+        },
+        "L":{
+            "item":"minecraft:lapis_block"
+        },
+        "A":{
+            "item":"minecraft:amethyst_shard"
+        },
+        "G":{
+            "item":"minecraft:gold_ingot"
+        },
+        "B":{
+            "item":"minecraft:book"
+        }
+    },
+    "result":{
+        "item": "difusement:difusement_altar"
+    }
+}
