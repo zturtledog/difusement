@@ -38,6 +38,9 @@ public class obsidian_pedestal_ber implements BlockEntityRenderer<obsidian_pedes
 
     public float ease(float n) {
         // \left(2x-1\right)^{6}
-        return (float) Math.pow(n,6f);
+        // return (float) Math.pow(n,6f);
+
+        //13.6x^{2}\left(x-1\right)^{2}
+        return (float)(13.6*Math.pow(n, 2)*Math.pow(n-1, 2));
     }
 }
