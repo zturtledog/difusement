@@ -15,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-import com.confusedparrotfish.difusement.util.util.doing;
 import com.confusedparrotfish.difusement.util.animationHelper;
 import java.util.ArrayList;
 
@@ -42,14 +41,9 @@ public class itemcloud {
         // }
         boolean hasremoved = false;
         for (item_instance instance : instances) {
-            if (instance.next == doing.NOTHING) {
-                instance.target = new Vec3(0,-1.5,0);
-            }
             instance.pos = (instance.pos.lerp(instance.target,instance.speed));
             if (instance.pos.distanceToSqr(instance.target) < 0.01) {
-                if (instance.next == doing.SOMETHING) {
-                    instance.target = new Vec3(random_float(),random_float(),random_float());
-                }
+                instance.target = new Vec3(random_float(),random_float(),random_float());
             }
         }
         if (hasremoved) {
@@ -110,7 +104,6 @@ public class itemcloud {
         public Vec3 pos = Vec3.ZERO;
         public Vec3 target = Vec3.ZERO;
         public float speed = 0f;
-        public doing next = doing.SOMETHING;
         
         public item_instance(Vec3 pos, Vec3 target, float speed) {
             this.pos = pos;
@@ -141,22 +134,9 @@ public class itemcloud {
         }
     }
 
-    public void set_task(int index, doing action) {
-        if (index < instances.size()) {
-            instances.get(index).next = action;
-        }
-    }
-
     public int count() {
         return instances.size();
     }
-
-    public doing task(int index) {
-        if (index < instances.size()) {
-            return instances.get(index).next;
-        }
-        return doing.NOTHING;
-    } 
 
     public boolean isfull() {
         return !(instances.size() < max);
@@ -170,13 +150,9 @@ public class itemcloud {
         int count = buf.readInt();
         ItemStack item = buf.readItem();
         int max = buf.readInt();
-        byte[] doings = buf.readByteArray();
 
         itemcloud ret = new itemcloud(max, item);
         ret.set_count(count);
-        for (int i = 0; i < doings.length; i++) {
-            ret.set_task(i,doing.dbite(doings[i]));
-        }
         return ret;
     }
 
@@ -184,10 +160,5 @@ public class itemcloud {
         buf.writeInt(count());
         buf.writeItem(item);
         buf.writeInt(max);
-        byte[] doings = new byte[count()]; 
-        for (int i = 0; i < count(); i++) {
-            doings[i] = instances.get(i).next.bite();
-        }
-        buf.writeByteArray(doings);
     }
 }

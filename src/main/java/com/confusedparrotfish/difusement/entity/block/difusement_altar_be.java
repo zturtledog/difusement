@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import com.confusedparrotfish.difusement.block.blocks;
 import com.confusedparrotfish.difusement.network.message;
 import com.confusedparrotfish.difusement.network.packet.ItemCloudSyncS2CPacket.cloudImplementor;
-import com.confusedparrotfish.difusement.network.packet.DifusementAltarSyncS2CPacket.difusement_altar_packet;
 import com.confusedparrotfish.difusement.network.packet.ItemCloudSyncS2CPacket;
 import com.confusedparrotfish.difusement.util.SingleItemInventoryBlockEntity;
 import com.confusedparrotfish.difusement.util.ber_components.enchantingbook;
@@ -244,13 +243,5 @@ public class difusement_altar_be extends SingleItemInventoryBlockEntity implemen
     @Override
     public void cloud_update(itemcloud cloud) {
         this.cloud.set_count(cloud.count());
-        for (int i = 0; i < cloud.count(); i++) {
-            this.cloud.set_task(i, cloud.task(i));
-        }
-    }
-
-    public void recv_packet(difusement_altar_packet pack) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recv_packet'");
     }
 }
