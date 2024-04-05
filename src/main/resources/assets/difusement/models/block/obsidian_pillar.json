@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+      "down": "difusement:block/obsidian_pillar_bottom",
+      "up": "difusement:block/obsidian_pillar_top",
+      "north": "difusement:block/obsidian_pillar_side",
+      "east": "difusement:block/obsidian_pillar_side",
+      "south": "difusement:block/obsidian_pillar_side",
+      "west": "difusement:block/obsidian_pillar_side",
+      "particle": "difusement:block/obsidian_pillar_top"
+    }
+  }

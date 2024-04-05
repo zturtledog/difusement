@@ -10,6 +10,8 @@ import com.confusedparrotfish.difusement.item.items;
 import com.confusedparrotfish.difusement.network.message;
 import com.mojang.logging.LogUtils;
 
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +24,17 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class Difusement {
     public static final String MODID = "difusement";
     private static final Logger LOGGER = LogUtils.getLogger();
+
+     public static CreativeModeTab difusement_tab = new CreativeModeTab("Difusement") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(blocks.OBSIDIAN_PEDESTAL.get().asItem());
+        }
+
+        public ItemStack getIconItem() {
+            return new ItemStack(blocks.OBSIDIAN_PEDESTAL.get().asItem());
+        };
+    };
 
     public Difusement() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

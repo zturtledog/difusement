@@ -10,7 +10,6 @@ import com.confusedparrotfish.difusement.block.blocks;
 import com.confusedparrotfish.difusement.network.message;
 import com.confusedparrotfish.difusement.network.packet.ItemCloudSyncS2CPacket.cloudImplementor;
 import com.confusedparrotfish.difusement.network.packet.DifusementAltarSyncS2CPacket.difusement_altar_packet;
-import com.confusedparrotfish.difusement.network.packet.DifusementAltarSyncS2CPacket;
 import com.confusedparrotfish.difusement.network.packet.ItemCloudSyncS2CPacket;
 import com.confusedparrotfish.difusement.util.SingleItemInventoryBlockEntity;
 import com.confusedparrotfish.difusement.util.ber_components.enchantingbook;
@@ -181,8 +180,8 @@ public class difusement_altar_be extends SingleItemInventoryBlockEntity implemen
                         } else {
                             EnchantmentHelper.setEnchantments(post_enchantments, ent.item);
                         }
-                        ent.notifyClient();
                     }
+                    ent.notifyClient();
                 }
             }
         } else {

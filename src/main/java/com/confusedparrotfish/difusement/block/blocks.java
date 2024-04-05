@@ -7,6 +7,8 @@ import com.google.common.base.Supplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -22,6 +24,10 @@ public class blocks {
     })));
     public static final RegistryObject<Block> OBSIDIAN_PEDESTAL = block_item("obsidian_pedestal", ()->new obsidian_pedestal(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> OBSIDIAN_BRICKS = block_item("obsidian_bricks", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+    public static final RegistryObject<Block> OBSIDIAN_PILLAR = block_item("obsidian_pillar_bricks", ()->new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+    public static final RegistryObject<Block> OBSIDIAN_PILLAR_BRICKS = block_item("obsidian_pillar", ()->new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+
     public static RegistryObject<Block> block(String id, Supplier<Block> base) {
         return blocks.register(id, base);
     }
@@ -33,6 +39,12 @@ public class blocks {
     }
 
     public static RegistryObject<Block> block_item(String id, Supplier<Block> base) {
+        RegistryObject<Block> ret = blocks.register(id, base);
+        items.item(id, () -> new BlockItem(ret.get(), new Item.Properties().tab(Difusement.difusement_tab)));
+        return ret;
+    }
+
+    public static RegistryObject<Block> block_item_no_tab(String id, Supplier<Block> base) {
         RegistryObject<Block> ret = blocks.register(id, base);
         items.item(id, () -> new BlockItem(ret.get(), new Item.Properties()));
         return ret;

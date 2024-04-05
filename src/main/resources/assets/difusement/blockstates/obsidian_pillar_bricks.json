@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "difusement:block/obsidian_pillar_bricks" },
+    "axis=z": { "model": "difusement:block/obsidian_pillar_bricks", "x": 90 },
+    "axis=x": { "model": "difusement:block/obsidian_pillar_bricks", "x": 90, "y": 90 }
+  }
+}

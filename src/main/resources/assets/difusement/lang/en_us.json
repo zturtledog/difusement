@@ -2,5 +2,8 @@
     "itemGroup.Difusement":"Difusement",
     
     "block.difusement.difusement_altar":"Difusement Altar",
-    "block.difusement.obsidian_pedestal":"Obsidian Pedestal"
+    "block.difusement.obsidian_pedestal":"Obsidian Pedestal",
+    "block.difusement.obsidian_pillar":"Obsidian Pillar",
+    "block.difusement.obsidian_pillar_bricks":"Obsidian Pillar Bricks",
+    "block.difusement.obsidian_bricks":"Obsidian Bricks"
 }

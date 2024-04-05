@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class itemcloud {
     ArrayList<item_instance> instances = new ArrayList<>();
     ItemStack item = ItemStack.EMPTY;
-    int max = 0;
+    public int max = 0;
 
     public itemcloud(int max, ItemStack item) {
         this.max = max;

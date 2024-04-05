@@ -16,7 +16,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EnchantmentTableBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -103,5 +102,21 @@ public class difusement_altar extends BaseEntityBlock {
         }
         
         level.removeBlockEntity(pos);
+    }
+
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be != null) {
+            float lapis = (((float)((difusement_altar_be)be).cloud.count())/(float)((difusement_altar_be)be).cloud.max)*7.5f;
+            if (!((difusement_altar_be)be).isEmpty()) {
+                lapis+=7.5;
+            }
+            return Math.round(lapis);
+        }
+        return 0;
     }
 }

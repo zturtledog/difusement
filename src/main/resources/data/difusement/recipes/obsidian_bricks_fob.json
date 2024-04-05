@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "difusement:obsidian_pillar_bricks"
+    },
+    "result": "difusement:obsidian_bricks",
+    "count": 1
+}
