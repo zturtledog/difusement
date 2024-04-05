@@ -15,7 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+// import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+// import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 // import org.slf4j.Logger;
@@ -46,6 +48,9 @@ public class Difusement {
             event.registerBlockEntityRenderer(block_entities.OBSIDIAN_PEDESTAL_BET.get(), obsidian_pedestal_ber::new);
             LOGGER.info("Registered Block Entity Renderers (Tile Entity Renderers) for difusement");
         });
+
+        
+        // ModLoadingContext.get().registerConfig(Type.COMMON, CONFIG);
 
         blocks.blocks.register(modEventBus);
         items.items.register(modEventBus);

@@ -18,6 +18,9 @@ import com.confusedparrotfish.difusement.util.ber_components.itemcloud.item_inst
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -101,6 +104,7 @@ public class difusement_altar_be extends SingleItemInventoryBlockEntity implemen
                 }
             }
             if (lapi != null) {
+                ((ServerLevel)level).playSound(null, ent.worldPosition, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1F, (float) (0.8F + Math.random() * 0.4F));
                 ent.cloud.add(item_instance.rand(lapi.position().subtract(Vec3.atLowerCornerOf(pos))));
                 lapi.getItem().shrink(1);
                 ent.notifyClient();
@@ -181,6 +185,8 @@ public class difusement_altar_be extends SingleItemInventoryBlockEntity implemen
                         }
                     }
                     ent.notifyClient();
+                    ((ServerLevel)level).playSound(null, ent.worldPosition, SoundEvents.EVOKER_CAST_SPELL, SoundSource.BLOCKS, 1.5F, (float) (0.8F + Math.random() * 0.4F));
+                    ((ServerLevel)level).playSound(null, ent.worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.5F, (float) (0.8F + Math.random() * 0.4F));
                 }
             }
         } else {

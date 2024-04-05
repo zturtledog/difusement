@@ -1,6 +1,8 @@
 package com.confusedparrotfish.difusement.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -72,15 +74,22 @@ public class obsidian_pedestal extends BaseEntityBlock {
 
         ItemStack itm = plr.getItemInHand(hand).copy();
         obsidian_pedestal_be be = (obsidian_pedestal_be) lvl.getBlockEntity(pos);
+        boolean has = false;
         if (!be.isEmpty() && itm.isEmpty()) {
             plr.setItemInHand(hand, be.item);
             be.setItem(ItemStack.EMPTY);
+            has = true;
         } else if (be.isEmpty() && !itm.isEmpty()) {
             be.setItem(itm);
             plr.setItemInHand(hand, ItemStack.EMPTY);
+            has = true;
         } else if (!be.isEmpty() && !itm.isEmpty()) {
             plr.setItemInHand(hand, be.item);
             be.setItem(itm);
+            has = true;
+        }
+        if (has) {
+            lvl.playSound(plr, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1F, (float) (0.8F + Math.random() * 0.4F));
         }
 
         return InteractionResult.CONSUME_PARTIAL;
