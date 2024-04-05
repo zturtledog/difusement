@@ -4,11 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -38,7 +40,7 @@ public class obsidian_pedestal extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new obsidian_pedestal_be(pos,state);
+        return new obsidian_pedestal_be(pos, state);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class obsidian_pedestal extends BaseEntityBlock {
                 ((obsidian_pedestal_be) ent).drops();
             }
         }
-        
+
         level.removeBlockEntity(pos);
     }
 
@@ -70,7 +72,7 @@ public class obsidian_pedestal extends BaseEntityBlock {
             InteractionHand hand, BlockHitResult hit) {
 
         ItemStack itm = plr.getItemInHand(hand).copy();
-        obsidian_pedestal_be be = (obsidian_pedestal_be)lvl.getBlockEntity(pos); 
+        obsidian_pedestal_be be = (obsidian_pedestal_be) lvl.getBlockEntity(pos);
         if (!be.isEmpty() && itm.isEmpty()) {
             plr.setItemInHand(hand, be.item);
             be.setItem(ItemStack.EMPTY);
@@ -81,12 +83,25 @@ public class obsidian_pedestal extends BaseEntityBlock {
             plr.setItemInHand(hand, be.item);
             be.setItem(itm);
         }
-        
+
         return InteractionResult.CONSUME_PARTIAL;
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
+            BlockEntityType<T> type) {
         return createTickerHelper(type, block_entities.OBSIDIAN_PEDESTAL_BET.get(), obsidian_pedestal_be::tick);
+    }
+
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be != null) {
+            return AbstractContainerMenu.getRedstoneSignalFromContainer((obsidian_pedestal_be)be);
+        }
+        return 0;
     }
 }
