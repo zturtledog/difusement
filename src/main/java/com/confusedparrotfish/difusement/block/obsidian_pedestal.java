@@ -74,17 +74,12 @@ public class obsidian_pedestal extends BaseEntityBlock {
         if (!be.isEmpty() && itm.isEmpty()) {
             plr.setItemInHand(hand, be.item);
             be.setItem(ItemStack.EMPTY);
-            lvl.setBlockEntity(be);
         } else if (be.isEmpty() && !itm.isEmpty()) {
             be.setItem(itm);
             plr.setItemInHand(hand, ItemStack.EMPTY);
-            be.setChanged();
-            lvl.setBlockEntity(be);
         } else if (!be.isEmpty() && !itm.isEmpty()) {
             plr.setItemInHand(hand, be.item);
             be.setItem(itm);
-            be.setChanged();
-            lvl.setBlockEntity(be);
         }
         
         return InteractionResult.CONSUME_PARTIAL;

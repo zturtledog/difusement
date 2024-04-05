@@ -1,6 +1,8 @@
 package com.confusedparrotfish.difusement.network;
 
 import com.confusedparrotfish.difusement.Difusement;
+import com.confusedparrotfish.difusement.network.packet.DifusementAltarSyncS2CPacket;
+import com.confusedparrotfish.difusement.network.packet.ItemCloudSyncS2CPacket;
 import com.confusedparrotfish.difusement.network.packet.ItemStackSyncS2CPacket;
 
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +34,18 @@ public class message {
                 .decoder(ItemStackSyncS2CPacket::new)
                 .encoder(ItemStackSyncS2CPacket::toBytes)
                 .consumerMainThread(ItemStackSyncS2CPacket::handle)
+                .add();
+        
+        net.messageBuilder(ItemCloudSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ItemCloudSyncS2CPacket::new)
+                .encoder(ItemCloudSyncS2CPacket::toBytes)
+                .consumerMainThread(ItemCloudSyncS2CPacket::handle)
+                .add();
+
+        net.messageBuilder(DifusementAltarSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(DifusementAltarSyncS2CPacket::new)
+                .encoder(DifusementAltarSyncS2CPacket::toBytes)
+                .consumerMainThread(DifusementAltarSyncS2CPacket::handle)
                 .add();
     }
 

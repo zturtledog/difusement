@@ -89,4 +89,31 @@ public class util {
         }
         return new dual<List<E>,List<E>>(a, b);
     }
+
+    public static int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    public static enum doing {
+        NOTHING,
+        SOMETHING;
+
+        public byte bite() {
+            if (this==SOMETHING) {
+                return 1;
+            } else if (this==NOTHING) {
+                return 0;
+            }
+            return -1;
+        } 
+
+        public static doing dbite(byte bite) {
+            if (bite==1) {
+                return SOMETHING;
+            } else if (bite==0) {
+                return NOTHING;
+            }
+            return NOTHING;
+        } 
+    }
 }

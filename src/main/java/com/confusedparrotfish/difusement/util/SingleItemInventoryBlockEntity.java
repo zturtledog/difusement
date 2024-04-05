@@ -16,13 +16,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class SingleItemInventoryBlockEntity extends BlockEntity implements WorldlyContainer {
+public class SingleItemInventoryBlockEntity extends BlockEntity implements WorldlyContainer, animationHelper {
     public SingleItemInventoryBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
 
     public ItemStack item = ItemStack.EMPTY;
     public int time = 0;
+    public int timeoff = util.getRandomNumber(0, 50);
 
     public void drops() {
         Containers.dropContents(level, worldPosition, this);
@@ -162,4 +163,14 @@ public class SingleItemInventoryBlockEntity extends BlockEntity implements World
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
       return ClientboundBlockEntityDataPacket.create(this);
    }
+
+    @Override
+    public int offtime() {
+        return time+timeoff;
+    }
+    
+    @Override
+    public int time() {
+        return time;
+    }
 }
